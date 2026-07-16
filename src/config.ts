@@ -1,0 +1,71 @@
+// src/config.ts
+
+export const CONFIG = {
+  // 1. Cuma tukar nombor telefon klien di sini sekali sahaja!
+  whatsappNumber: "60123456789", 
+
+  // 2. Senarai rumah klien (Anda boleh edit, tambah, atau buang di sini)
+  properties: [
+    {
+      id: 1,
+      title: "Semi-D 2 Tingkat",
+      type: "Rumah Semi-Detached",
+      location: "Shah Alam, Selangor",
+      price: "RM 850,000",
+      priceMonthly: "~RM 3,800/bln",
+      beds: 4,
+      baths: 3,
+      sqft: 2200,
+      imageUrl: "https://images.pexels.com/photos/31737859/pexels-photo-31737859.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200",
+      badge: "Panas 🔥",
+      badgeColor: "from-orange-500 to-red-500",
+      // Tulis teks WhatsApp biasa sahaja di bawah ni. Tak payah letak %20 dah!
+      whatsappMsg: "Salam Azlan, saya berminat dengan Semi-D 2 Tingkat di Shah Alam (RM 850,000). Boleh dapatkan maklumat lanjut?",
+    },
+    {
+      id: 2,
+      title: "Kondominium Mewah",
+      type: "Kondominium",
+      location: "KLCC, Kuala Lumpur",
+      price: "RM 1,200,000",
+      priceMonthly: "~RM 5,300/bln",
+      beds: 3,
+      baths: 2,
+      sqft: 1450,
+      imageUrl: "https://images.pexels.com/photos/26108669/pexels-photo-26108669.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200",
+      badge: "Eksklusif ✦",
+      badgeColor: "from-yellow-500 to-amber-600",
+      whatsappMsg: "Salam Azlan, saya berminat dengan Kondominium Mewah di KLCC (RM 1,200,000). Boleh dapatkan maklumat lanjut?",
+    },
+    {
+      id: 3,
+      title: "Apartment Idaman",
+      type: "Apartment",
+      location: "Petaling Jaya, Selangor",
+      price: "RM 450,000",
+      priceMonthly: "~RM 2,000/bln",
+      beds: 3,
+      baths: 2,
+      sqft: 980,
+      imageUrl: "https://images.pexels.com/photos/323780/pexels-photo-323780.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200",
+      badge: "Mampu Milik",
+      badgeColor: "from-emerald-500 to-teal-600",
+      whatsappMsg: "Salam Azlan, saya berminat dengan Apartment Idaman di Petaling Jaya (RM 450,000). Boleh dapatkan maklumat lanjut?",
+    },
+    {
+      id: 4,
+      title: "Townhouse Premium",
+      type: "Townhouse",
+      location: "Subang Jaya, Selangor",
+      price: "RM 680,000",
+      priceMonthly: "~RM 3,100/bln",
+      beds: 4,
+      baths: 3,
+      sqft: 1800,
+      imageUrl: "https://images.pexels.com/photos/36903868/pexels-photo-36903868.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200",
+      badge: "Baru Siap",
+      badgeColor: "from-sky-500 to-blue-600",
+      whatsappMsg: "Salam Azlan, saya berminat dengan Townhouse Premium di Subang Jaya (RM 680,000). Boleh dapatkan maklumat lanjut?",
+    },
+  ],
+};
