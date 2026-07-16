@@ -8,41 +8,48 @@ import {
   Calculator,
   Sparkles,
 } from "lucide-react";
-import { CONFIG } from "@/config"; // Import config ringkas
+import { CONFIG } from "@/config";
 import AgentProfile from "@/components/AgentProfile";
 import StatsGrid from "@/components/StatsGrid";
 import LinkButton from "@/components/LinkButton";
 import PropertyGrid from "@/components/PropertyGrid";
 import SocialFooter from "@/components/SocialFooter";
 
-// Ambil nombor whatsapp terus dari config
 const WHATSAPP_NUMBER = CONFIG.whatsappNumber;
 
-const ctaButtons = [
-  {
-    href: `https://wa.me/${WHATSAPP_NUMBER}?text=Salam%20Azlan%2C%20saya%20ingin%20semak%20kelayakan%20loan%20saya.%20Boleh%20bantu%3F`,
-    icon: <Calculator className="w-5 h-5 text-white" />,
-    label: "Semak Kelayakan Loan",
-    sublabel: "Percuma & tanpa komitmen • via WhatsApp",
-    variant: "primary" as const,
-  },
-  {
-    href: `https://wa.me/${WHATSAPP_NUMBER}?text=Salam%20Azlan%2C%20saya%20ingin%20konsultasi%20mengenai%20jual%2Fbeli%20rumah.`,
-    icon: <UserCheck className="w-5 h-5 text-emerald-400" />,
-    label: "Konsultasi Jual/Beli Rumah",
-    sublabel: "Dapatkan nasihat profesional percuma",
-    variant: "secondary" as const,
-  },
-  {
-    href: `https://wa.me/${WHATSAPP_NUMBER}?text=Salam%20Azlan%2C%20saya%20nak%20tahu%20tentang%20senarai%20rumah%20mampu%20milik%202026.`,
-    icon: <Home className="w-5 h-5 text-yellow-400" />,
-    label: "Senarai Rumah Mampu Milik 2026",
-    sublabel: "Projek baru & subsidi kerajaan tersedia",
-    variant: "ghost" as const,
-  },
-];
+const iconMap = {
+  Calculator: <Calculator className="w-5 h-5 text-white" />,
+  UserCheck: <UserCheck className="w-5 h-5 text-emerald-400" />,
+  Home: <Home className="w-5 h-5 text-yellow-400" />,
+};
 
-// Stagger container variants
+const themeStyles = {
+  emerald: {
+    glow: "radial-gradient(circle, #10b981 0%, transparent 70%)",
+    statusDot: "bg-emerald-500",
+    borderHint: "border-emerald-500/15",
+    textHint: "text-emerald-400",
+  },
+  rose: {
+    glow: "radial-gradient(circle, #f43f5e 0%, transparent 70%)",
+    statusDot: "bg-rose-500",
+    borderHint: "border-rose-500/15",
+    textHint: "text-rose-400",
+  },
+  blue: {
+    glow: "radial-gradient(circle, #3b82f6 0%, transparent 70%)",
+    statusDot: "bg-blue-500",
+    borderHint: "border-blue-500/15",
+    textHint: "text-blue-400",
+  },
+  gold: {
+    glow: "radial-gradient(circle, #eab308 0%, transparent 70%)",
+    statusDot: "bg-yellow-500",
+    borderHint: "border-yellow-500/15",
+    textHint: "text-yellow-400",
+  },
+};
+
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
@@ -55,67 +62,28 @@ const containerVariants = {
 };
 
 export default function HomePage() {
+  const currentTheme = themeStyles[CONFIG.theme || "emerald"];
+
   return (
     <div className="min-h-screen w-full relative overflow-x-hidden">
-      {/* ─── Ambient background gradients ─── */}
+      {/* ── Ambient background gradients ── */}
       <div className="fixed inset-0 pointer-events-none z-0" aria-hidden="true">
-        {/* Deep background */}
         <div className="absolute inset-0 bg-slate-950" />
-
-        {/* Emerald radial top-left */}
         <div
           className="absolute -top-32 -left-32 w-96 h-96 rounded-full opacity-20"
-          style={{
-            background:
-              "radial-gradient(circle, #10b981 0%, transparent 70%)",
-            filter: "blur(60px)",
-          }}
+          style={{ background: currentTheme.glow, filter: "blur(60px)" }}
         />
-
-        {/* Gold radial top-right */}
         <div
           className="absolute -top-20 -right-20 w-80 h-80 rounded-full opacity-15"
-          style={{
-            background:
-              "radial-gradient(circle, #eab308 0%, transparent 70%)",
-            filter: "blur(70px)",
-          }}
+          style={{ background: "radial-gradient(circle, #eab308 0%, transparent 70%)", filter: "blur(70px)" }}
         />
-
-        {/* Emerald radial bottom-right */}
         <div
           className="absolute bottom-0 right-0 w-[28rem] h-[28rem] rounded-full opacity-10"
-          style={{
-            background:
-              "radial-gradient(circle, #10b981 0%, transparent 70%)",
-            filter: "blur(80px)",
-          }}
-        />
-
-        {/* Subtle center gold glow */}
-        <div
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[32rem] h-[32rem] rounded-full opacity-5"
-          style={{
-            background:
-              "radial-gradient(circle, #f59e0b 0%, transparent 60%)",
-            filter: "blur(100px)",
-          }}
-        />
-
-        {/* Grid overlay */}
-        <div
-          className="absolute inset-0 opacity-[0.025]"
-          style={{
-            backgroundImage: `
-              linear-gradient(rgba(255,255,255,0.4) 1px, transparent 1px),
-              linear-gradient(90deg, rgba(255,255,255,0.4) 1px, transparent 1px)
-            `,
-            backgroundSize: "40px 40px",
-          }}
+          style={{ background: currentTheme.glow, filter: "blur(80px)" }}
         />
       </div>
 
-      {/* ─── Main layout: centered 480px column ─── */}
+      {/* ── Main layout ── */}
       <div className="relative z-10 min-h-screen flex justify-center">
         <motion.main
           variants={containerVariants}
@@ -131,23 +99,20 @@ export default function HomePage() {
             className="flex items-center justify-between px-5 py-3"
           >
             <div className="flex items-center gap-2">
-              <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+              <div className={`w-2 h-2 rounded-full ${currentTheme.statusDot} animate-pulse`} />
               <span className="text-[10px] text-slate-500 font-medium tracking-wider uppercase">
-                Dalam Talian
+                {CONFIG.profile.statusText}
               </span>
             </div>
             <div className="flex items-center gap-1.5 glass-card rounded-full px-3 py-1">
               <Sparkles className="w-2.5 h-2.5 text-yellow-400" />
               <span className="text-[10px] text-yellow-400 font-semibold">
-                Ejen Teratas IQI 2024
+                {CONFIG.profile.badgeText}
               </span>
             </div>
           </motion.div>
 
-          {/* ── Agent Profile ── */}
           <AgentProfile animationDelay={0.15} />
-
-          {/* ── Stats Grid ── */}
           <StatsGrid animationDelay={0.3} />
 
           {/* ── CTA Section label ── */}
@@ -166,11 +131,11 @@ export default function HomePage() {
 
           {/* ── CTA Buttons ── */}
           <div className="flex flex-col gap-3 px-4 mb-7">
-            {ctaButtons.map((btn, index) => (
+            {CONFIG.ctaButtons.map((btn, index) => (
               <LinkButton
                 key={btn.label}
-                href={btn.href}
-                icon={btn.icon}
+                href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(btn.textTemplate)}`}
+                icon={iconMap[btn.iconType]}
                 label={btn.label}
                 sublabel={btn.sublabel}
                 variant={btn.variant}
@@ -180,15 +145,15 @@ export default function HomePage() {
             ))}
           </div>
 
-          {/* ── WhatsApp floating hint ── */}
+          {/* ── WhatsApp Hint Card ── */}
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.65, duration: 0.5 }}
-            className="mx-4 mb-6 glass-card rounded-2xl p-3.5 flex items-center gap-3 border-emerald-500/15"
+            className={`mx-4 mb-6 glass-card rounded-2xl p-3.5 flex items-center gap-3 ${currentTheme.borderHint}`}
           >
-            <div className="w-10 h-10 rounded-xl bg-green-500/15 border border-green-500/20 flex items-center justify-center shrink-0">
-              <MessageCircle className="w-5 h-5 text-green-400" />
+            <div className="w-10 h-10 rounded-xl bg-slate-900 border border-white/5 flex items-center justify-center shrink-0">
+              <MessageCircle className={`w-5 h-5 ${currentTheme.textHint}`} />
             </div>
             <div className="flex-1 min-w-0">
               <p className="text-xs font-semibold text-white mb-0.5">
@@ -196,10 +161,7 @@ export default function HomePage() {
               </p>
               <p className="text-[10px] text-slate-400 leading-relaxed">
                 Lazimnya balas dalam{" "}
-                <span className="text-emerald-400 font-medium">
-                  &lt; 15 minit
-                </span>{" "}
-                pada waktu bekerja
+                <span className={`${currentTheme.textHint} font-medium`}>&lt; 15 minit</span> pada waktu bekerja
               </p>
             </div>
             <motion.a
@@ -214,10 +176,7 @@ export default function HomePage() {
             </motion.a>
           </motion.div>
 
-          {/* ── Property Grid ── */}
           <PropertyGrid animationDelay={0.7} />
-
-          {/* ── Social Footer ── */}
           <SocialFooter animationDelay={0.85} />
         </motion.main>
       </div>
