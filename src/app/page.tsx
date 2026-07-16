@@ -178,39 +178,7 @@ export default function HomePage() {
             ))}
           </div>
 
-          {/* ── WhatsApp floating hint ── */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.65, duration: 0.5 }}
-            className="mx-4 mb-6 glass-card rounded-2xl p-3.5 flex items-center gap-3 border-emerald-500/15"
-          >
-            <div className="w-10 h-10 rounded-xl bg-green-500/15 border border-green-500/20 flex items-center justify-center shrink-0">
-              <MessageCircle className="w-5 h-5 text-green-400" />
-            </div>
-            <div className="flex-1 min-w-0">
-              <p className="text-xs font-semibold text-white mb-0.5">
-                Balas Pantas via WhatsApp
-              </p>
-              <p className="text-[10px] text-slate-400 leading-relaxed">
-                Lazimnya balas dalam{" "}
-                <span className="text-emerald-400 font-medium">
-                  &lt; 15 minit
-                </span>{" "}
-                pada waktu bekerja
-              </p>
-            </div>
-            <motion.a
-              href={`https://wa.me/${WHATSAPP_NUMBER}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="shrink-0 bg-green-500 hover:bg-green-400 transition-colors duration-200 rounded-xl px-3 py-2"
-            >
-              <span className="text-[11px] font-bold text-white">Whatsapp</span>
-            </motion.a>
-          </motion.div>
+
 
           {/* ── Property Grid ── */}
           <PropertyGrid animationDelay={0.7} />
