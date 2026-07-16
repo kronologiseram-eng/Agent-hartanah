@@ -9,7 +9,7 @@ export const CLIENT_DATA = {
     renNumber: "REN 54321",
     agency: "IQI Realty Sdn Bhd",
     location: "Kuala Lumpur & Selangor",
-    avatarUrl: "/azlan.jpg", // Pastikan gambar azlan.jpg ada dalam folder public/
+    avatarUrl: "/agent-hartanah.png", // Pastikan gambar azlan.jpg ada dalam folder public/
     badgeText: "Ejen Teratas IQI 2024",
     statusText: "Dalam Talian",
   },
