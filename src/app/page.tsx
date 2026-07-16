@@ -8,13 +8,15 @@ import {
   Calculator,
   Sparkles,
 } from "lucide-react";
+import { CONFIG } from "@/config"; // Import config ringkas
 import AgentProfile from "@/components/AgentProfile";
 import StatsGrid from "@/components/StatsGrid";
 import LinkButton from "@/components/LinkButton";
 import PropertyGrid from "@/components/PropertyGrid";
 import SocialFooter from "@/components/SocialFooter";
 
-const WHATSAPP_NUMBER = "60123456789";
+// Ambil nombor whatsapp terus dari config
+const WHATSAPP_NUMBER = CONFIG.whatsappNumber;
 
 const ctaButtons = [
   {
@@ -56,7 +58,7 @@ export default function HomePage() {
   return (
     <div className="min-h-screen w-full relative overflow-x-hidden">
       {/* ─── Ambient background gradients ─── */}
-      <div className="fixed inset-0 pointer-events-none z-0" aria-hidden>
+      <div className="fixed inset-0 pointer-events-none z-0" aria-hidden="true">
         {/* Deep background */}
         <div className="absolute inset-0 bg-slate-950" />
 
