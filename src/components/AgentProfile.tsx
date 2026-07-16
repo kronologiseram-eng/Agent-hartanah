@@ -29,7 +29,7 @@ export default function AgentProfile({ animationDelay = 0 }: AgentProfileProps) 
         {/* Avatar container */}
         <div className="relative w-28 h-28 rounded-full overflow-hidden border-2 border-yellow-400/60 pulse-ring">
           <Image
-            src="/images/avatar-azlan.jpg"
+            src="/agent-hartanah.png"
             alt="Azlan Syafiq — Perunding Hartanah Berdaftar"
             fill
             className="object-cover object-top"
