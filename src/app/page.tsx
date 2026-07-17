@@ -7,8 +7,9 @@ import {
   Home,
   Calculator,
   Sparkles,
+  Lock, // Import ikon lock
 } from "lucide-react";
-import { CONFIG } from "@/config";
+import { CONFIG } from "@/config"; 
 import AgentProfile from "@/components/AgentProfile";
 import StatsGrid from "@/components/StatsGrid";
 import LinkButton from "@/components/LinkButton";
@@ -17,12 +18,7 @@ import SocialFooter from "@/components/SocialFooter";
 
 const WHATSAPP_NUMBER = CONFIG.whatsappNumber;
 
-const iconMap = {
-  Calculator: <Calculator className="w-5 h-5 text-white" />,
-  UserCheck: <UserCheck className="w-5 h-5 text-emerald-400" />,
-  Home: <Home className="w-5 h-5 text-yellow-400" />,
-};
-
+// PEMETAAN WARNA TEMA UNTUK PAGE.TSX
 const themeStyles = {
   emerald: {
     glow: "radial-gradient(circle, #10b981 0%, transparent 70%)",
@@ -50,6 +46,30 @@ const themeStyles = {
   },
 };
 
+const ctaButtons = [
+  {
+    href: `https://wa.me/${WHATSAPP_NUMBER}?text=Salam%20Azlan%2C%20saya%20ingin%20semak%20kelayakan%20loan%20saya.%20Boleh%20bantu%3F`,
+    icon: <Calculator className="w-5 h-5 text-white" />,
+    label: "Semak Kelayakan Loan",
+    sublabel: "Percuma & tanpa komitmen • via WhatsApp",
+    variant: "primary" as const,
+  },
+  {
+    href: `https://wa.me/${WHATSAPP_NUMBER}?text=Salam%20Azlan%2C%20saya%20ingin%20konsultasi%20mengenai%20jual%2Fbeli%20rumah.`,
+    icon: <UserCheck className="w-5 h-5 text-emerald-400" />,
+    label: "Konsultasi Jual/Beli Rumah",
+    sublabel: "Dapatkan nasihat profesional percuma",
+    variant: "secondary" as const,
+  },
+  {
+    href: `https://wa.me/${WHATSAPP_NUMBER}?text=Salam%20Azlan%2C%20saya%20nak%20tahu%20tentang%20senarai%20rumah%20mampu%20milik%202026.`,
+    icon: <Home className="w-5 h-5 text-yellow-400" />,
+    label: "Senarai Rumah Mampu Milik 2026",
+    sublabel: "Projek baru & subsidi kerajaan tersedia",
+    variant: "ghost" as const,
+  },
+];
+
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
@@ -64,6 +84,49 @@ const containerVariants = {
 export default function HomePage() {
   const currentTheme = themeStyles[CONFIG.theme || "emerald"];
 
+  // ─── JIKA ISLOCKED = TRUE, TUNJUK LOCK SCREEN INI ───
+  if (CONFIG.isLocked) {
+    return (
+      <div className="min-h-screen w-full relative bg-slate-950 flex items-center justify-center p-4">
+        {/* Ambient background glow */}
+        <div
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-80 rounded-full opacity-10"
+          style={{ background: currentTheme.glow, filter: "blur(60px)" }}
+        />
+        
+        {/* Lock Card */}
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          className="relative z-10 w-full max-w-[360px] glass-card rounded-3xl p-8 border-white/5 text-center flex flex-col items-center"
+        >
+          {/* Lock Icon */}
+          <div className="w-16 h-16 rounded-2xl bg-slate-900 border border-white/5 flex items-center justify-center mb-6 shadow-xl">
+            <Lock className="w-8 h-8 text-yellow-500 animate-pulse" />
+          </div>
+
+          <h2 className="text-lg font-bold text-white mb-2">Sesi Demo Tamat</h2>
+          <p className="text-xs text-slate-400 leading-relaxed mb-6">
+            Laman web demo untuk <span className="text-white font-semibold">{CONFIG.profile.name}</span> ini telah ditutup sementara. Sila hubungi developer untuk mengaktifkan laman web penuh.
+          </p>
+
+          {/* Butang Hubungi Developer */}
+          <motion.a
+            href={`https://wa.me/60123456789?text=Salam%20Azri%2C%20saya%20ingin%20aktifkan%20laman%20web%20penuh%20saya.`} // Ganti no phone anda kat sini
+            target="_blank"
+            rel="noopener noreferrer"
+            whileHover={{ scale: 1.03 }}
+            whileTap={{ scale: 0.97 }}
+            className="w-full py-3 rounded-2xl bg-yellow-500 hover:bg-yellow-400 text-slate-950 font-bold text-xs transition-colors duration-200 flex items-center justify-center gap-2"
+          >
+            Hubungi Developer
+          </motion.a>
+        </motion.div>
+      </div>
+    );
+  }
+
+  // ─── JIKA ISLOCKED = FALSE, TUNJUK WEBSITE PENUH ───
   return (
     <div className="min-h-screen w-full relative overflow-x-hidden">
       {/* ── Ambient background gradients ── */}
@@ -115,7 +178,6 @@ export default function HomePage() {
           <AgentProfile animationDelay={0.15} />
           <StatsGrid animationDelay={0.3} />
 
-          {/* ── CTA Section label ── */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -131,11 +193,11 @@ export default function HomePage() {
 
           {/* ── CTA Buttons ── */}
           <div className="flex flex-col gap-3 px-4 mb-7">
-            {CONFIG.ctaButtons.map((btn, index) => (
+            {ctaButtons.map((btn, index) => (
               <LinkButton
                 key={btn.label}
-                href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(btn.textTemplate)}`}
-                icon={iconMap[btn.iconType]}
+                href={btn.href}
+                icon={btn.icon}
                 label={btn.label}
                 sublabel={btn.sublabel}
                 variant={btn.variant}
