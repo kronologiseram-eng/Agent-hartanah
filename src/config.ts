@@ -1,6 +1,11 @@
 // src/config.ts
 
 export const CONFIG = {
+  // ─── SISTEM KUNCI (KILL SWITCH) ───
+  // set 'true' untuk KUNCI website (tunjuk skrin lock)
+  // set 'false' untuk UNLOCK website (tunjuk website penuh selepas bayar)
+  isLocked: false, 
+  
   // ─── TEMA WARNA UTAMA ───
   // Pilihan: "emerald" (Hijau) | "rose" (Pink) | "blue" (Biru) | "gold" (Emas)
   theme: "emerald" as "emerald" | "rose" | "blue" | "gold",
